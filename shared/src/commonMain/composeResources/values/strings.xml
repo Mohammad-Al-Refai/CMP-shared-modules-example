@@ -1,0 +1,15 @@
+<resources>
+    <string name="hitman">HITMAN</string>
+    <string name="close">Close</string>">
+    <string name="silverballer">Silverballer</string>
+    <string name="aboutSilverballer">Agent 47’s iconic signature weapon. A stylish and powerful handgun with a low rate of fire that delivers high damage, even at range.</string>
+
+    <string name="lockpick">Lockpick</string>
+    <string name="aboutLockpick">Silently and discretely open physical locks with precision, but at the risk of raising suspicion. The ideal tool for the patient assassin.</string>
+
+    <string name="briefcase">Briefcase</string>
+    <string name="aboutBriefcase">The perfect choice for an assassin who needs to conceal, carry and quickly retrieve illegal items. Occasionally defies the laws of physics.</string>
+
+    <string name="rubberDucky">Rubber Ducky</string>
+    <string name="aboutRubberDucky">More than just a distraction, this small but potent device will incinerate those unfortunate enough to interact with it. Remote and proximity variations are available.</string>
+</resources>
