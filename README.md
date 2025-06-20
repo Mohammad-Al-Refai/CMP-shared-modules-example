@@ -1,14 +1,5 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+This is a multiple Compose Multiplatform projects targeting Android, iOS.
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
-
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
-
-
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+- `/app1` & `/app2` are compose multiplatform projects.
+- `/iosApp` & `/iosApp2` are ios projects that use the shared framework from `/app1` & `/app2`.
+- `/shared` is the common resources & data & ui between `/app1` & `/app2` and they both use it.
