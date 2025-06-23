@@ -3,10 +3,14 @@ package mo.refaai.example.app2
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
@@ -28,6 +32,7 @@ import androidx.compose.ui.window.DialogProperties
 import mo.refaai.shared.data.ToolItem
 import mo.refaai.shared.data.ToolsData
 import mo.refaai.shared.resources.SharedResources
+import mo.refaai.shared.ui.components.HitmanImage
 import mo.refaai.shared.ui.theme.HSpacing
 import mo.refaai.shared.ui.theme.SharedTheme
 import mo.refaai.shared.ui.theme.VSpacing
@@ -61,47 +66,66 @@ fun App() {
                     dialogVisible.value = false
                     selectedItem.value = null
                 })
-            Column(
-                modifier = Modifier.fillMaxSize()
-                    .padding(
-                        top = innerPadding.calculateTopPadding(),
-                        bottom = innerPadding.calculateBottomPadding(),
-                        start = HSpacing.M.value,
-                        end = HSpacing.M.value
-                    ),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+            HitmanImage()
+            Box(
+                modifier = Modifier.padding(
+                    top = innerPadding.calculateTopPadding() + VSpacing.XL3.value,
+                    bottom = innerPadding.calculateBottomPadding(),
+                    start = HSpacing.M.value,
+                    end = HSpacing.M.value
+                ).fillMaxSize()
             ) {
-                LazyVerticalGrid(columns = GridCells.Fixed(2), modifier = Modifier.fillMaxSize()) {
-                    items(ToolsData.size) { index ->
-                        val data = ToolsData[index]
-                        Card(
-                            modifier = Modifier.fillMaxWidth()
-                                .padding(top = VSpacing.M.value, end = HSpacing.M.value).clickable {
-                                    selectedItem.value = data
-                                    dialogVisible.value = true
-                                }
-                        ) {
-                            Column(
-                                modifier = Modifier.fillMaxSize().padding(
-                                    vertical = VSpacing.M.value,
-                                    horizontal = HSpacing.M.value
-                                )
+                Column(
+                    modifier = Modifier.fillMaxSize()
+                        .padding(
+                            top = innerPadding.calculateTopPadding(),
+                            bottom = innerPadding.calculateBottomPadding(),
+                            start = HSpacing.M.value,
+                            end = HSpacing.M.value
+                        ),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(2),
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.spacedBy(VSpacing.S.value),
+                        horizontalArrangement = Arrangement.spacedBy(HSpacing.S.value),
+                    ) {
+                        items(ToolsData.size) { index ->
+                            val data = ToolsData[index]
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        selectedItem.value = data
+                                        dialogVisible.value = true
+                                    }
                             ) {
-                                Image(
-                                    painter = painterResource(data.imageResource),
-                                    contentScale = ContentScale.Fit,
-                                    contentDescription = null
-                                )
-                                Text(
-                                    text = stringResource(data.title),
-                                    fontSize = MaterialTheme.typography.titleLarge.fontSize,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.error
-                                )
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(
+                                            vertical = VSpacing.M.value,
+                                            horizontal = HSpacing.M.value
+                                        )
+                                ) {
+                                    Image(
+                                        painter = painterResource(data.imageResource),
+                                        contentScale = ContentScale.Fit,
+                                        contentDescription = null
+                                    )
+                                    Text(
+                                        text = stringResource(data.title),
+                                        fontSize = MaterialTheme.typography.titleLarge.fontSize,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.error
+                                    )
+                                }
                             }
                         }
                     }
+
                 }
             }
         }

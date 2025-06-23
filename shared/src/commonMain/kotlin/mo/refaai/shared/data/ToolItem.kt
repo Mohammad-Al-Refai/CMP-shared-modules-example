@@ -1,7 +1,6 @@
 package mo.refaai.shared.data
 
 
-import mo.refaai.shared.resources.SharedResources
 import multipleappsinone.shared.generated.resources.Res
 import multipleappsinone.shared.generated.resources.aboutBriefcase
 import multipleappsinone.shared.generated.resources.aboutLockpick
@@ -24,19 +23,19 @@ data class ToolItem(
 val ToolsData = arrayOf(
     ToolItem(
         title = Res.string.silverballer,
-        description =  Res.string.aboutSilverballer,
-        imageResource =  Res.drawable.silverballer
+        description = Res.string.aboutSilverballer,
+        imageResource = Res.drawable.silverballer
     ), ToolItem(
-        title =  Res.string.lockpick,
-        description =  Res.string.aboutLockpick,
-        imageResource =  Res.drawable.lockpick
+        title = Res.string.lockpick,
+        description = Res.string.aboutLockpick,
+        imageResource = Res.drawable.lockpick
     ), ToolItem(
-        title =  Res.string.briefcase,
-        description =  Res.string.aboutBriefcase,
-        imageResource =  Res.drawable.briefcase
+        title = Res.string.briefcase,
+        description = Res.string.aboutBriefcase,
+        imageResource = Res.drawable.briefcase
     ), ToolItem(
-        title =  Res.string.rubberDucky,
-        description =  Res.string.aboutRubberDucky,
-        imageResource =  Res.drawable.duck
+        title = Res.string.rubberDucky,
+        description = Res.string.aboutRubberDucky,
+        imageResource = Res.drawable.duck
     )
 )
