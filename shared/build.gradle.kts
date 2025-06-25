@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
@@ -26,21 +28,21 @@ kotlin {
     // https://developer.android.com/kotlin/multiplatform/migrate
     val xcfName = "sharedKit"
 
-    iosX64 {
-        binaries.framework {
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
             baseName = xcfName
+            binaryOption("bundleId", "shared")
         }
     }
-
-    iosArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    iosSimulatorArm64 {
-        binaries.framework {
-            baseName = xcfName
+    targets.configureEach {
+        compilations.configureEach {
+            compileTaskProvider.get().compilerOptions {
+                freeCompilerArgs.add("-Xexpect-actual-classes")
+            }
         }
     }
     // Source set declarations.
@@ -85,5 +87,22 @@ kotlin {
             }
         }
     }
+    val currentIosTarget = project.findProperty("currentIosTarget") as? String ?: "app1"
 
+    val generatedHeaderDir = if (currentIosTarget == "app1") {
+        project.file("${rootDir}/iosApp/iosApp/GeneratedHeaders")
+    }else{
+        project.file("${rootDir}/iosApp2/iosApp2/GeneratedHeaders")
+    }
+
+    targets.withType<KotlinNativeTarget> {
+        compilations["main"].cinterops {
+            create("ioslib") {
+                defFile(project.file("src/iosMain/c_interop/ioslib.def"))
+                packageName("com.example.ioslib")
+                // Safe way to point to the actual headers and include path
+                includeDirs(generatedHeaderDir)
+            }
+        }
+    }
 }

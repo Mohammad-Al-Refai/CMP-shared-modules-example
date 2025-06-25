@@ -25,6 +25,7 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "App1"
             isStatic = true
+            binaryOption("bundleId", "mo.refaai.example.app1")
         }
     }
     
@@ -44,20 +45,10 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(project(":shared"))
         }
+        iosMain.dependencies {
+        }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-        }
-    }
-    val generatedHeaderDir = project.file("${rootDir}/iosApp/iosApp/GeneratedHeaders")
-
-    targets.withType<KotlinNativeTarget> {
-        compilations["main"].cinterops {
-            create("ioslib") {
-                defFile(project.file("src/iosMain/c_interop/ioslib.def"))
-                packageName("com.example.ioslib")
-                // Safe way to point to the actual headers and include path
-                includeDirs(generatedHeaderDir)
-            }
         }
     }
 }
