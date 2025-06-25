@@ -1,6 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -18,7 +19,6 @@ kotlin {
     }
     
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -29,7 +29,6 @@ kotlin {
     }
     
     sourceSets {
-        
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -47,6 +46,18 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+    }
+    val generatedHeaderDir = project.file("${rootDir}/iosApp/iosApp/GeneratedHeaders")
+
+    targets.withType<KotlinNativeTarget> {
+        compilations["main"].cinterops {
+            create("ioslib") {
+                defFile(project.file("src/iosMain/c_interop/ioslib.def"))
+                packageName("com.example.ioslib")
+                // Safe way to point to the actual headers and include path
+                includeDirs(generatedHeaderDir)
+            }
         }
     }
 }

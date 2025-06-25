@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BBB4E81F2E0B3B7800CA4D0F /* IosLib in Frameworks */ = {isa = PBXBuildFile; productRef = BBB4E81E2E0B3B7800CA4D0F /* IosLib */; };
+		BBF1FC542E09F405000543E6 /* IosLib in Frameworks */ = {isa = PBXBuildFile; productRef = BBF1FC532E09F405000543E6 /* IosLib */; };
+		BBF1FC632E09F4FE000543E6 /* IosLib in Frameworks */ = {isa = PBXBuildFile; productRef = BBF1FC622E09F4FE000543E6 /* IosLib */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		B9DA97B12DC1472C00A4DA20 /* MultipleAppsInOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultipleAppsInOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -41,6 +47,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBF1FC632E09F4FE000543E6 /* IosLib in Frameworks */,
+				BBF1FC542E09F405000543E6 /* IosLib in Frameworks */,
+				BBB4E81F2E0B3B7800CA4D0F /* IosLib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +80,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B9DA97BF2DC1472D00A4DA20 /* Build configuration list for PBXNativeTarget "iosApp" */;
 			buildPhases = (
+				BBB4E84C2E0B7DB000CA4D0F /* Copy Swift Headers */,
 				B9DA97F42DC1497100A4DA20 /* Compile Kotlin Framework */,
 				B9DA97AD2DC1472C00A4DA20 /* Sources */,
 				B9DA97AE2DC1472C00A4DA20 /* Frameworks */,
@@ -85,6 +95,9 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
+				BBF1FC532E09F405000543E6 /* IosLib */,
+				BBF1FC622E09F4FE000543E6 /* IosLib */,
+				BBB4E81E2E0B3B7800CA4D0F /* IosLib */,
 			);
 			productName = iosApp;
 			productReference = B9DA97B12DC1472C00A4DA20 /* MultipleAppsInOne.app */;
@@ -114,6 +127,9 @@
 			);
 			mainGroup = B9DA97A82DC1472C00A4DA20;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BBB4E81D2E0B3B7800CA4D0F /* XCLocalSwiftPackageReference "../IosLib" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B9DA97B22DC1472C00A4DA20 /* Products */;
 			projectDirPath = "";
@@ -153,6 +169,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :app1:embedAndSignAppleFrameworkForXcode\n";
+		};
+		BBB4E84C2E0B7DB000CA4D0F /* Copy Swift Headers */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Swift Headers";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\nMODULE_NAME=\"MultipleAppsInOne\"\n\n# Remove trailing \"/Products\" from BUILD_DIR\nREAL_BUILD_DIR=$(dirname \"$BUILD_DIR\")\n\nSWIFT_HEADER_PATH=\"${REAL_BUILD_DIR}/Intermediates.noindex/${TARGET_NAME}.build/${CONFIGURATION}-iphoneos/${TARGET_NAME}.build/DerivedSources/${MODULE_NAME}-Swift.h\"\n\nDESTINATION_PATH=\"${SRCROOT}/iosApp/GeneratedHeaders\"\n\necho \"🔍 Looking for header at: $SWIFT_HEADER_PATH\"\n\nif [ -f \"$SWIFT_HEADER_PATH\" ]; then\n  echo \"✅ Found header. Copying to $DESTINATION_PATH\"\n  mkdir -p \"$DESTINATION_PATH\"\n  cp \"$SWIFT_HEADER_PATH\" \"$DESTINATION_PATH/\"\nelse\n  echo \"❌ Swift header not found!\"\n  echo \"ℹ️ BUILD_DIR: $BUILD_DIR\"\n  echo \"ℹ️ REAL_BUILD_DIR: $REAL_BUILD_DIR\"\n  echo \"ℹ️ CONFIGURATION: $CONFIGURATION\"\n  echo \"ℹ️ TARGET_NAME: $TARGET_NAME\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -314,6 +349,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -348,6 +384,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -376,6 +413,28 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		BBB4E81D2E0B3B7800CA4D0F /* XCLocalSwiftPackageReference "../IosLib" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../IosLib;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BBB4E81E2E0B3B7800CA4D0F /* IosLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IosLib;
+		};
+		BBF1FC532E09F405000543E6 /* IosLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IosLib;
+		};
+		BBF1FC622E09F4FE000543E6 /* IosLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IosLib;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B9DA97A92DC1472C00A4DA20 /* Project object */;
 }
