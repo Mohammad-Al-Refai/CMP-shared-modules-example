@@ -8,5 +8,4 @@
 
 ### Project architecture
 
-
-![Screenshot 2025-06-25 at 6 58 02 AM](https://github.com/user-attachments/assets/d2197cea-5a22-4406-972c-6b7a7b396988)
+![Screenshot 2025-06-25 at 7 01 00 AM](https://github.com/user-attachments/assets/51d5847b-6500-4086-bfd7-51afbca5c269)
