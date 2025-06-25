@@ -1,4 +1,4 @@
-This is A Kotlin Multiplatform project targeting Android, iOS.
+### This is a Kotlin Multiplatform project targeting multiple Android, iOS projects with shared code.
 
 - `/app1` & `/app2` are compose multiplatform modules.
 - `/iosApp` & `/iosApp2` are ios projects that use the shared framework from `/app1` & `/app2`.
@@ -8,4 +8,5 @@ This is A Kotlin Multiplatform project targeting Android, iOS.
 
 ### Project architecture
 
-![image](https://github.com/user-attachments/assets/bdc63ef0-fadd-40d6-9577-4c1a7dc2f5e9)
+
+![Screenshot 2025-06-25 at 6 58 02 AM](https://github.com/user-attachments/assets/d2197cea-5a22-4406-972c-6b7a7b396988)
